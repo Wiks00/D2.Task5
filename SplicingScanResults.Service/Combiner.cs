@@ -237,7 +237,7 @@ namespace SplicingScanResults.Service
 
                         while (slices != 0)
                         {
-                            var filePart = bytes.Skip(skip).Take(take > bytes.Length ? bytes.Length - skip : take).ToArray();
+                            var filePart = bytes.Skip(skip).Take((skip + take) > bytes.Length - 1 ? bytes.Length - skip : take).ToArray();
                             skip += take;
 
                             imageSender.Send(new BrokeredMessage(filePart)
